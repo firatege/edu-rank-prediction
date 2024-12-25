@@ -17,41 +17,60 @@ The Random Forest model was trained with the following hyperparameters:
 
 ```python
 {
-    'n_estimators': 1400,
-    'min_samples_split': 2,
-    'min_samples_leaf': 1,
-    'max_features': 'auto',
+   'n_estimators': 1000,
+    'min_samples_split': 4,
+    'min_samples_leaf': 2,
+    'max_features': 8,
     'max_depth': 100,
-    'bootstrap': True
+    'bootstrap': True,
+    'random_state': 42,
+    'verbose': 1,
+    'class_weight': 'balanced'
 }
 ```
 
 ## Model Performance
-- **Accuracy**: 73.99%
+- **Accuracy**: 72.90%
 
 ### Classification Report
 
-| Rank Category   | Precision | Recall | F1-Score | Support |
-|-----------------|-----------|--------|----------|---------|
-| **0-600**       | 0.97      | 0.95   | 0.96     | 130     |
-| **1101-1300**   | 0.31      | 0.39   | 0.35     | 28      |
-| **1301-1400**   | 0.78      | 0.28   | 0.41     | 25      |
-| **1401-1500**   | 0.50      | 0.29   | 0.36     | 14      |
-| **1501-1600**   | 0.00      | 0.00   | 0.00     | 21      |
-| **1601-1700**   | 0.00      | 0.00   | 0.00     | 25      |
-| **1700+**       | 0.61      | 0.95   | 0.75     | 80      |
-| **601-1100**    | 0.79      | 0.92   | 0.85     | 96      |
+ ## Model Performance Metrics
 
-**Overall Accuracy**: 73.99%
+| Rank Category | Precision | Recall | F1-Score | Support |
+|---------------|-----------|--------|----------|---------|
+| 1-300         | 0.96      | 0.94   | 0.95     | 90      |
+| 301-400       | 0.84      | 0.90   | 0.87     | 90      |
+| 401-700       | 0.74      | 0.66   | 0.69     | 90      |
+| 701-900       | 0.64      | 0.68   | 0.66     | 90      |
+| 901-1100      | 0.67      | 0.60   | 0.63     | 90      |
+| 1101-1200     | 0.75      | 0.84   | 0.79     | 90      |
+| 1201-1300     | 0.78      | 0.62   | 0.69     | 90      |
+| 1301-1400     | 0.69      | 0.71   | 0.70     | 90      |
+| 1401-1500     | 0.65      | 0.82   | 0.73     | 90      |
+| 1501-1600     | 0.76      | 0.72   | 0.74     | 90      |
+| 1601-1700     | 0.70      | 0.68   | 0.69     | 90      |
+| 1701-1800     | 0.74      | 0.71   | 0.72     | 90      |
+| 1801+         | 0.60      | 0.59   | 0.59     | 90      |
 
-- **Macro Average**: Precision = 0.49, Recall = 0.47, F1-Score = 0.46
-- **Weighted Average**: Precision = 0.68, Recall = 0.74, F1-Score = 0.69
+### Overall Performance
 
-## Insights
-- The model performs exceptionally well for universities ranked **0-600**, with a precision of 0.97 and recall of 0.95.
-- The model struggles with rankings in the **1501-1600** and **1601-1700** categories, achieving 0 precision and recall. These categories may require more targeted data or a different model approach for better performance.
+| Metric        | Value |
+|---------------|-------|
+| Accuracy      | 0.73  |
+| Macro Avg     | 0.73  |
+| Weighted Avg  | 0.73  |
+
 
 ---
+
+
+## Insights
+
+- **High Precision and Recall in Top Ranks:** The model performs exceptionally well in the **1-300** category, with an F1-score of 0.95. This indicates strong reliability for top-ranking instances.
+- **Middle Ranks Performance:** Categories such as **1101-1200** and **1401-1500** show balanced precision and recall, suggesting consistent performance.
+- **Lower Ranks (1801+):** Precision and recall drop significantly for lower-ranked categories, with an F1-score of only 0.59. This could indicate difficulty in distinguishing these instances or data imbalance.
+- **Macro vs. Weighted Avg:** Similar values for macro and weighted averages show that the dataset is relatively balanced in terms of category distribution.
+- **Areas for Improvement:** Focus on enhancing performance in the **401-700** and **1801+** categories by exploring better feature engineering, resampling, or advanced models.
 
 
 
